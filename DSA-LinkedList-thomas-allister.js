@@ -53,7 +53,7 @@ class LinkedList {
       return console.error('No items in list!');
     }
     let current = this.head;
-    while (current !== null && current.value !== key) {
+    while (current !== null && current.value !== item) {
       current = current.next;
     }
     if (current === null) {
@@ -66,8 +66,8 @@ class LinkedList {
     if (this.head.value === key) {
       this.head = new _Node(key, this.head.next)
     } else {
-      let current = this.head
-      let previous = this.head
+      let current = this.head;
+      let previous = this.head;
       while (current !== null && current.value !== key) {
         previous = current;
         current = current.next;
@@ -87,9 +87,48 @@ class LinkedList {
     if (current === null ) {
       return console.log('Item not found');
     }
-    current.next = new _Node(item, current.next)
+    current.next = new _Node(item, current.next);
   }
 
+  insertAt(item, position) {
+    let counter = 1;
+    if (position === 1) {
+      this.insertFirst(item);
+    } else {
+      let previous = this.head;
+      let current = this.head;
+      while(current !== null && counter !== position) {
+        previous = current;
+        current = current.next;
+        counter++;
+      }
+      if(current === null && counter === position) {
+        previous.next = new _Node(item, null);
+      }
+      if(current === null && counter < position) {
+        return console.log('Position is unreachable');
+      }
+      previous.next = new _Node(item, current);
+    }
+  }
+}
+
+function display(ll) {
+  console.log(JSON.stringify(ll, null, 2));
+}
+
+function size(ll) {
+  let counter = 0;
+  let current = ll.head;
+  while(current !== null) {
+    current = current.next;
+    counter++;
+  }
+  return counter;
+}
+
+function isEmpty(ll) {
+  return (ll.head === null);
 }
 
 function main() {
@@ -103,19 +142,33 @@ function main() {
 
   // console.log(JSON.stringify(SLL, null, 2));
 
-  SLL.insertLast('Tauhida');
+  // SLL.insertLast('Tauhida');
 
   // console.log(JSON.stringify(SLL, null, 2));
 
-  SLL.remove('squirrel');
+  // SLL.remove('squirrel');
 
-  SLL.insertBefore('Athena', 'Boomer');
+  // SLL.insertBefore('Athena', 'Boomer');
 
   // console.log(JSON.stringify(SLL, null, 2));
 
-  SLL.insertAfter('Hotdog', 'Helo');
+  // SLL.insertAfter('Hotdog', 'Helo');
 
-  console.log(JSON.stringify(SLL, null, 2));
+  // console.log(JSON.stringify(SLL, null, 2));
+
+  // SLL.insertAt('Kat', 3);
+
+  // SLL.remove('Tauhida');
+
+  // SLL.insertAt('Test', 7);
+
+  // console.log(JSON.stringify(SLL, null, 2));
+
+  display(SLL);
+
+  // console.log(size(SLL));
+  
+  // console.log(isEmpty(SLL));
 }
 
 main();
