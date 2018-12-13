@@ -84,7 +84,7 @@ class LinkedList {
     while (current !== null && current.value !== key) {
       current = current.next;
     }
-    if (current === null ) {
+    if (current === null) {
       return console.log('Item not found');
     }
     current.next = new _Node(item, current.next);
@@ -97,15 +97,15 @@ class LinkedList {
     } else {
       let previous = this.head;
       let current = this.head;
-      while(current !== null && counter !== position) {
+      while (current !== null && counter !== position) {
         previous = current;
         current = current.next;
         counter++;
       }
-      if(current === null && counter === position) {
+      if (current === null && counter === position) {
         previous.next = new _Node(item, null);
       }
-      if(current === null && counter < position) {
+      if (current === null && counter < position) {
         return console.log('Position is unreachable');
       }
       previous.next = new _Node(item, current);
@@ -120,7 +120,7 @@ function display(ll) {
 function size(ll) {
   let counter = 0;
   let current = ll.head;
-  while(current !== null) {
+  while (current !== null) {
     current = current.next;
     counter++;
   }
@@ -132,7 +132,7 @@ function isEmpty(ll) {
 }
 
 function findPrevious(ll, key) {
-  
+
   if (isEmpty(ll)) {
     return console.log('list is empty');
   }
@@ -199,7 +199,7 @@ function main() {
   // display(SLL);
 
   // console.log(size(SLL));
-  
+
   // console.log(isEmpty(SLL));
 
   // console.log(findPrevious(SLL, 'Apollo'));
@@ -209,9 +209,63 @@ function main() {
 
 }
 
-main();
+// main();
 
 
 
+// Mystery program
+// This function traverses a linked list to check for duplicate items.
+// If duplicates are found, they are removed from the linked list.
+// runtime: O(n^2)
+
+function WhatDoesThisProgramDo(lst) {
+  let current = lst.head;
+  // while current is not the last item enter loop.
+  while (current !== null) {
+    // declaring newNode as variable
+    let newNode = current;
+    // if newNode.next is not at the end of the linked list enter loop
+    while (newNode.next !== null) {
+      // if there are two consecutive values that are the same enter if block
+      if (newNode.next.value === current.value) {
+        // sets the newNode.next pointer to the node after current thus removing it from the linked list.
+        newNode.next = newNode.next.next;
+      }
+      else {
+        // if we do not enter the if block above, run the statement below to continue traversing the linked list.
+        newNode = newNode.next;
+      }
+    }
+    // once we complete the while loop, run statement below to continue traversing the linked list.
+    current = current.next;
+  }
+}
 
 
+// Reverse a list
+function reverseAList(ll) {
+  let current = ll.head;
+  let previous = null;
+  let tempNext = null;
+  while (current !== null) {
+    tempNext = current.next;
+    current.next = previous;
+    previous = current;
+    current = tempNext;
+  }
+  ll.head = previous;
+  return ll;
+}
+
+function reverseTest() {
+  let SLL = new LinkedList();
+  SLL.insertFirst('a');
+  SLL.insertLast('b');
+  SLL.insertLast('c');
+  SLL.insertLast('d');
+  SLL.insertLast('e');
+  reverseAList(SLL);
+  display(SLL);
+}
+
+reverseTest();
