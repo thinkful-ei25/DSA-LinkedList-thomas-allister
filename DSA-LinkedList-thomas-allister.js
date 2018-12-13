@@ -257,15 +257,54 @@ function reverseAList(ll) {
   return ll;
 }
 
-function reverseTest() {
+//find third element from the end
+function thirdElementFromEnd(ll) {
+  let current = ll.head;
+  if (size(ll) < 3) {
+    return console.log('less than 3 items in list');
+  }
+
+  while (current.next.next.next != null) {
+    current = current.next;
+  }
+  return current;
+}
+
+function findMiddle(ll) {
+  let current = ll.head;
+  let previous = null;
+  let tempNext = null;
+  let counter = 0;
+  while (current !== null) {
+    tempNext = current.next;
+    current.next = previous;
+    previous = current;
+    current = tempNext;
+    counter++
+  }
+  ll.head = previous;
+  let middle = Math.floor(counter / 2);
+  current = ll.head;
+  for (let i = 0; i < middle; i++) {
+    current = current.next
+  }
+  return current;
+}
+
+function Test() {
   let SLL = new LinkedList();
   SLL.insertFirst('a');
   SLL.insertLast('b');
   SLL.insertLast('c');
   SLL.insertLast('d');
   SLL.insertLast('e');
-  reverseAList(SLL);
-  display(SLL);
+  SLL.insertLast('f');
+  SLL.insertLast('g');
+  // console.log(thirdElementFromEnd(SLL));
+  // reverseAList(SLL);
+  // display(SLL);
+  console.log(findMiddle(SLL));
 }
 
-reverseTest();
+Test();
+
