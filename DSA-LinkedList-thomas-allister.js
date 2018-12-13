@@ -131,6 +131,38 @@ function isEmpty(ll) {
   return (ll.head === null);
 }
 
+function findPrevious(ll, key) {
+  
+  if (isEmpty(ll)) {
+    return console.log('list is empty');
+  }
+  if (ll.head.value === key) {
+    return console.log('No previous item');
+  } else {
+    let current = ll.head
+    let previous = ll.head
+    while (current !== null && current.value !== key) {
+      previous = current;
+      current = current.next;
+    }
+    if (current === null) {
+      return console.log('Item not found')
+    }
+    return previous;
+  }
+}
+
+function findLast(ll) {
+  if (isEmpty(ll)) {
+    return console.log('list is empty');
+  }
+  let current = ll.head;
+  while (current.next !== null) {
+    current = current.next
+  }
+  return current;
+}
+
 function main() {
 
   let SLL = new LinkedList();
@@ -164,11 +196,17 @@ function main() {
 
   // console.log(JSON.stringify(SLL, null, 2));
 
-  display(SLL);
+  // display(SLL);
 
   // console.log(size(SLL));
   
   // console.log(isEmpty(SLL));
+
+  // console.log(findPrevious(SLL, 'Apollo'));
+
+  console.log(findLast(SLL));
+
+
 }
 
 main();
