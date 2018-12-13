@@ -111,6 +111,19 @@ class LinkedList {
       previous.next = new _Node(item, current);
     }
   }
+
+  createCycle(item) {
+    if (this.head === null) {
+      this.insertFirst(item);
+    } else {
+      let tempNode = this.head;
+      while (tempNode.next !== null) {
+        tempNode = tempNode.next;
+      }
+      tempNode.next = this.head;
+    }
+
+  }
 }
 
 function display(ll) {
@@ -286,9 +299,22 @@ function findMiddle(ll) {
   let middle = Math.floor(counter / 2);
   current = ll.head;
   for (let i = 0; i < middle; i++) {
-    current = current.next
+    current = current.next;
   }
   return current;
+}
+
+function cycle(ll) {
+  let current = ll.head;
+  let storedValue = ll.head;
+  while (current !== null && storedValue !== null && storedValue.next !== null) {
+    current = current.next;
+    storedValue = storedValue.next.next;
+    if (current === storedValue) {
+      return true;
+    }
+  }
+  return false;
 }
 
 function Test() {
@@ -299,12 +325,12 @@ function Test() {
   SLL.insertLast('d');
   SLL.insertLast('e');
   SLL.insertLast('f');
-  SLL.insertLast('g');
+  SLL.createCycle('g');
   // console.log(thirdElementFromEnd(SLL));
   // reverseAList(SLL);
   // display(SLL);
-  console.log(findMiddle(SLL));
+  // console.log(findMiddle(SLL));
+  console.log(cycle(SLL));
 }
 
 Test();
-
